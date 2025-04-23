@@ -29,5 +29,5 @@ export default router
 router.beforeEach((to, from) => {
   const permissionStore = usePermissionStore()
   const requiredPermission = to.meta.permission ?? []
-  permissionStore.setPermissions(requiredPermission)
+  permissionStore.setPermissions(to.name, requiredPermission)
 })

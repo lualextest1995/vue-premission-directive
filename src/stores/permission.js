@@ -2,14 +2,16 @@ import { defineStore } from 'pinia'
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
-    permissions: [],
+    permissions: new Map(),
+    currentRoute: null,
   }),
   actions: {
-    setPermissions(perms) {
-      this.permissions = perms
+    setPermissions(routeName, perms) {
+      this.permissions.set(routeName, perms)
+      this.currentRoute = routeName
     },
     hasPermission(code) {
-      return this.permissions.includes(code)
+      return this.permissions.get(this.currentRoute)?.includes(code) || false
     },
   },
 })
